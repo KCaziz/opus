@@ -1,0 +1,108 @@
+/* ── Design tokens ── */
+:root {
+  --color-bg:         #f4f4f2;
+  --color-surface:    #e8e8e5;
+  --color-surface-2:  #dcdcda;
+  --color-border:     #d0d0cd;
+  --color-text:       #1a1a18;
+  --color-text-muted: #7a7a76;
+  --color-accent:     #1a1a18;
+  --radius-card:      16px;
+  --font-sans:        'Inter', system-ui, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Typography helpers ── */
+.text-muted-custom { color: var(--color-text-muted); }
+.label-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ── Placeholder boxes (images / media) ── */
+.placeholder-box {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+/* ── Cards ── */
+.card-opus {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-card);
+  border: none;
+  overflow: hidden;
+}
+
+/* ── Buttons ── */
+.btn-dark-opus {
+  background-color: var(--color-text);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 1.4rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.btn-dark-opus:hover { opacity: 0.85; }
+
+/* ── Hexagon decorations ── */
+.hex-group {
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+/* ── Section spacing ── */
+.section-gap { padding: 80px 0; }
+.section-gap-sm { padding: 48px 0; }
+
+/* ── FAQ accordion ── */
+.faq-item {
+  background-color: var(--color-surface);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.faq-item:hover { background-color: var(--color-surface-2); }
+
+/* ── Footer ── */
+.footer-opus {
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ── Navbar ── */
+.navbar-opus {
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+.navbar-brand-opus {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text) !important;
+}
