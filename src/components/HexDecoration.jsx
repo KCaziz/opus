@@ -1,3 +1,4 @@
+import React from 'react';
 export default function HexDecoration({ size = 28, gap = 6, rows = 6, cols = 5, className = '' }) {
   const w = size
   const h = size * 1.15

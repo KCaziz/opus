@@ -1,0 +1,329 @@
+{
+  "common": {
+    "next": "التالي",
+    "back": "السابق",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "choose": "اختيار",
+    "preview": "معاينة",
+    "popular": "شائع",
+    "loading": "جارٍ التحميل...",
+    "add": "إضافة",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "confirm": "تأكيد",
+    "close": "إغلاق",
+    "optional": "اختياري",
+    "required": "إلزامي"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "createCV": "إنشاء سيرتي الذاتية",
+    "myAccount": "حسابي",
+    "myCVs": "سيرتي الذاتية",
+    "settings": "الإعدادات"
+  },
+  "languages": {
+    "fr": "Français",
+    "en": "English",
+    "ar": "العربية"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "شيء آخر",
+      "title": "أنشئ سيرة ذاتية احترافية في بضع نقرات!",
+      "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "cta": "إنشاء سيرتي الذاتية",
+      "improve": "تحسين سيرتي الذاتية"
+    },
+    "preview": {
+      "progress": "مكتمل"
+    },
+    "whatCanYouDo": "ماذا يمكنك فعله مع opus؟",
+    "featureCard": {
+      "title": "عنوان القسم",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    "whyOpus": {
+      "eyebrow": "شيء آخر",
+      "title": "لماذا تنشئ سيرتك مع Opus؟",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    "section": {
+      "eyebrow": "شيء آخر",
+      "title": "عنوان القسم",
+      "desc": "Lorem ipsum dolor sit amet."
+    },
+    "support": {
+      "eyebrow": "لا تزال لديك أسئلة؟",
+      "title": "فريق دعم العملاء لدينا دائماً في خدمتك",
+      "desc": "Lorem ipsum dolor sit amet.",
+      "faqTitle": "السؤال الأول؟",
+      "faqBody": "Lorem ipsum dolor sit amet.",
+      "faq2": "السؤال الثاني؟",
+      "faq3": "السؤال الثالث؟",
+      "faq4": "السؤال الرابع؟"
+    }
+  },
+  "builder": {
+    "title": "اختر قالباً",
+    "subtitle": "أدخل اسمك لمعاينة القوالب في الوقت الفعلي.",
+    "firstNamePlaceholder": "الاسم الأول",
+    "lastNamePlaceholder": "اسم العائلة",
+    "chooseBtn": "اختيار",
+    "chooseTemplate": "اختر هذا القالب",
+    "noTemplates": "لا توجد قوالب في هذه الفئة.",
+    "colorPalette": "لون القالب",
+    "templateCount_one": "قالب واحد",
+    "templateCount_other": "{{count}} قوالب"
+  },
+  "categories": {
+    "all": "جميع القوالب",
+    "ats": "ATS",
+    "simple": "بسيط",
+    "moderne": "عصري",
+    "une-colonne": "عمود واحد",
+    "avec-photo": "مع صورة",
+    "professionnel": "احترافي",
+    "creatif": "إبداعي"
+  },
+  "colors": {
+    "blue": "أزرق",
+    "green": "أخضر",
+    "red": "أحمر",
+    "purple": "بنفسجي",
+    "gray": "رمادي",
+    "black": "أسود",
+    "teal": "أزرق زمردي",
+    "orange": "ذهبي"
+  },
+  "onboarding": {
+    "title": "كيف تريد البدء؟",
+    "subtitle": "لقد اخترت قالب <strong>{{template}}</strong>. اختر خياراً للمتابعة.",
+    "import": {
+      "title": "استيراد سيرة ذاتية موجودة",
+      "desc": "استورد سيرتك الذاتية بصيغة PDF أو DOCX. سنحلل المستند ونملأ المعلومات تلقائياً.",
+      "dropzone": "اسحب وأسقط ملفك هنا",
+      "or": "أو",
+      "browse": "تصفح الملفات",
+      "formats": "الصيغ المقبولة: PDF, DOCX (الحد الأقصى 5 ميغابايت)",
+      "analyzing": "جارٍ تحليل المستند...",
+      "success": "تم تحليل المستند بنجاح!",
+      "aiHint": "الاستخراج الذكي بالذكاء الاصطناعي قادم قريباً.",
+      "continue": "المتابعة إلى المحرر"
+    },
+    "scratch": {
+      "title": "إنشاء من الصفر",
+      "desc": "ابدأ بسيرة ذاتية فارغة وأملأ المعلومات خطوة بخطوة.",
+      "cta": "ابدأ الآن",
+      "badge": "موصى به"
+    }
+  },
+  "editor": {
+    "title": "محرر السيرة الذاتية",
+    "progressLabel": "مكتمل",
+    "livePreview": "معاينة مباشرة",
+    "backToTemplates": "العودة إلى القوالب",
+    "steps": {
+      "personalInfo": "معلومات الاتصال",
+      "summary": "الملخص",
+      "experience": "الخبرة",
+      "education": "التعليم",
+      "skills": "المهارات",
+      "finalize": "إنهاء"
+    },
+    "personalInfo": {
+      "title": "معلومات الاتصال",
+      "subtitle": "ستظهر هذه المعلومات في أعلى سيرتك الذاتية.",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "address": "العنوان",
+      "city": "المدينة",
+      "country": "البلد",
+      "title_field": "المسمى الوظيفي",
+      "title_hint": "مثال: مهندس برمجيات أول...",
+      "linkedin": "ملف LinkedIn",
+      "website": "الموقع الإلكتروني",
+      "photo": "الصورة الشخصية",
+      "addPhoto": "إضافة",
+      "photoHint": "JPG أو PNG أو WEBP · خلفية محايدة مُوصى بها.",
+      "removePhoto": "حذف الصورة"
+    },
+    "summary": {
+      "title": "الملخص المهني",
+      "subtitle": "فقرة قصيرة تلخص مسيرتك المهنية وأهدافك.",
+      "placeholder": "صف ملفك المهني في 2 إلى 4 جمل...",
+      "hint": "يبرز الملخص الجيد مهاراتك الرئيسية ويجذب انتباه المسؤول عن التوظيف.",
+      "charCount": "{{count}} حرف"
+    },
+    "experience": {
+      "title": "الخبرة المهنية",
+      "subtitle": "أضف أحدث خبراتك أولاً.",
+      "addEntry": "إضافة خبرة",
+      "jobTitle": "المسمى الوظيفي",
+      "company": "الشركة",
+      "location": "الموقع",
+      "startDate": "تاريخ البدء",
+      "endDate": "تاريخ الانتهاء",
+      "current": "المنصب الحالي",
+      "description": "الوصف",
+      "bulletPlaceholder": "صف إنجازاً أو مسؤولية...",
+      "addBullet": "+ إضافة سطر",
+      "noEntries": "لم تتم إضافة أي خبرة بعد.",
+      "editEntry": "تعديل الخبرة",
+      "dateError": "يجب أن يكون تاريخ الانتهاء بعد تاريخ البدء."
+    },
+    "education": {
+      "title": "التعليم",
+      "subtitle": "أضف شهاداتك ومؤهلاتك الأكاديمية.",
+      "addEntry": "إضافة تعليم",
+      "degree": "الشهادة / المؤهل",
+      "school": "المؤسسة",
+      "location": "الموقع",
+      "startYear": "سنة البدء",
+      "endYear": "سنة الانتهاء",
+      "grade": "التقدير",
+      "noEntries": "لم تتم إضافة أي تعليم بعد.",
+      "editEntry": "تعديل التعليم",
+      "yearError": "يجب أن تكون سنة الانتهاء أكبر من أو تساوي سنة البدء."
+    },
+    "skills": {
+      "title": "المهارات",
+      "subtitle": "أدرج مهاراتك التقنية والشخصية.",
+      "addSkill": "إضافة",
+      "skillPlaceholder": "مثال: React, Python...",
+      "skillsAdded": "{{count}} مهارة مضافة",
+      "languages": "اللغات",
+      "addLanguage": "إضافة لغة",
+      "languageName": "اللغة",
+      "languageLevel": "المستوى",
+      "levels": {
+        "native": "اللغة الأم / ثنائي اللغة",
+        "c2": "طلاقة (C2)",
+        "c1": "متقدم (C1)",
+        "b2": "فوق المتوسط (B2)",
+        "b1": "متوسط (B1)",
+        "a2": "مبتدئ (A2)"
+      },
+      "certifications": "الشهادات",
+      "addCertification": "إضافة شهادة",
+      "certPlaceholder": "مثال: AWS Solutions Architect — 2024"
+    },
+    "finalize": {
+      "title": "إنهاء سيرتك الذاتية",
+      "subtitle": "راجع المعاينة وحمّل سيرتك الذاتية.",
+      "colorTitle": "لون القالب",
+      "colorHint": "يُطبَّق اللون على القالب بأكمله.",
+      "downloadPDF": "تنزيل بصيغة PDF",
+      "downloadPDFSoon": "تنزيل PDF",
+      "pdfNote": "حمّل سيرتك الذاتية بصيغة PDF عالية الجودة.",
+      "pdfGenerating": "جاري التوليد...",
+      "tips": "نصائح للحصول على سيرة ذاتية مثالية",
+      "tip1": "لا تتجاوز سيرتك الذاتية صفحتين.",
+      "tip2": "استخدم أفعالاً نشطة لوصف خبراتك.",
+      "tip3": "كيّف ملخصك لكل فرصة عمل.",
+      "tip4": "تحقق من الإملاء واتساق التواريخ.",
+      "completion": "سيرتك الذاتية مكتملة بنسبة {{percent}}٪."
+    }
+  },
+  "progress": {
+    "title": "التقدم",
+    "sections": {
+      "personalInfo": "معلومات الاتصال",
+      "summary": "الملخص",
+      "experience": "الخبرة",
+      "education": "التعليم",
+      "skills": "المهارات"
+    }
+  },
+  "about": {
+    "eyebrow": "من نحن",
+    "title": "About us",
+    "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  },
+  "footer": {
+    "description": "منصة إنشاء السيرة الذاتية الاحترافية.",
+    "links": {
+      "about": "من نحن",
+      "contact": "اتصل بنا",
+      "terms": "الشروط والأحكام",
+      "privacy": "سياسة الخصوصية"
+    },
+    "rights": "© 2025 Société digital. جميع الحقوق محفوظة"
+  },
+  "improve": {
+    "title": "تحسين سيرتي الذاتية",
+    "subtitle": "استورد سيرتك الذاتية بصيغة PDF أو DOCX. سنحللها ونملأ جميع الأقسام تلقائياً، جاهزة للتحسين بقالب جديد.",
+    "backToHome": "العودة إلى الرئيسية",
+    "pipeline": {
+      "input": "سيرتك الذاتية",
+      "extract": "الاستخراج",
+      "analyze": "التحليل",
+      "output": "الملف جاهز"
+    },
+    "steps": {
+      "extract": "استخراج النص...",
+      "analyze": "تحليل الهيكل...",
+      "identify": "تحديد الأقسام...",
+      "map": "تحويل البيانات..."
+    },
+    "dropzone": {
+      "title": "اسحب وأسقط سيرتك هنا",
+      "subtitle": "أو انقر لتصفح الملفات",
+      "maxSize": "الحجم الأقصى: 10 ميغابايت"
+    },
+    "loading": "جارٍ التحليل…",
+    "done": {
+      "title": "اكتمل التحليل!",
+      "importedName": "تم استيراد CV {{name}} بنجاح.",
+      "experiences": "الخبرات",
+      "education": "التعليم",
+      "skills": "المهارات",
+      "languages": "اللغات",
+      "ready": "تم استخراج جميع معلوماتك وهي جاهزة للاستخدام. اختر الآن قالباً لسيرتك الذاتية الجديدة.",
+      "cta": "اختر قالباً"
+    },
+    "error": {
+      "title": "خطأ في التحليل",
+      "retry": "حاول مجدداً",
+      "NO_TEXT": "لا يحتوي هذا المستند على نص قابل للاستخراج. على الأرجح أنه مسح ضوئي (صورة). جرب PDF نصياً أو ملف DOCX. ملاحظة: السير الذاتية الصادرة عن هذا التطبيق لا يمكن إعادة استيرادها.",
+      "UNSUPPORTED_FORMAT": "صيغة غير مدعومة. يُرجى استخدام ملف PDF أو DOCX.",
+      "FILE_TOO_LARGE": "الملف كبير جداً. الحجم الأقصى: 10 ميغابايت.",
+      "NO_FILE": "لم يتم اختيار أي ملف.",
+      "generic": "حدث خطأ. يُرجى التحقق من ملفك والمحاولة مجدداً."
+    },
+    "privacy": "تتم معالجة مستندك محلياً في متصفحك — لا يتم إرسال أي بيانات إلى خادم."
+  },
+  "cv": {
+    "sections": {
+      "profile": "الملف الشخصي",
+      "experience": "الخبرة المهنية",
+      "education": "التعليم",
+      "skills": "المهارات",
+      "languages": "اللغات",
+      "certifications": "الشهادات",
+      "about": "نبذة عني",
+      "summary": "الملخص التنفيذي",
+      "educationSkills": "التعليم والمهارات",
+      "contact": "معلومات الاتصال",
+      "stack": "التقنيات",
+      "aboutCode": "عن_المطور",
+      "experienceCode": "خبرة",
+      "educationCode": "تعليم",
+      "certificationsCode": "شهادات"
+    },
+    "labels": {
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "location": "الموقع",
+      "linkedin": "لينكد إن",
+      "website": "الموقع الإلكتروني",
+      "educationUpper": "التعليم",
+      "skillsUpper": "المهارات",
+      "languagesUpper": "اللغات"
+    }
+  }
+}

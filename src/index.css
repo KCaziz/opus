@@ -1,3 +1,6 @@
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.icon-spin { animation: spin 1s linear infinite; display: inline-flex; }
+
 /* ── Design tokens ── */
 :root {
   --color-bg:         #f4f4f2;
@@ -22,12 +25,13 @@ body {
   background-color: var(--color-bg);
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
+  font-size: 15px;
 }
 
 /* ── Typography helpers ── */
 .text-muted-custom { color: var(--color-text-muted); }
 .label-tag {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-text-muted);
@@ -41,7 +45,7 @@ body {
   align-items: center;
   justify-content: center;
   color: var(--color-text-muted);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
 }
 
 /* ── Cards ── */
@@ -58,13 +62,170 @@ body {
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 0.55rem 1.4rem;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+  font-family: inherit;
+}
+.btn-dark-opus:hover {
+  opacity: 0.82;
+  transform: translateY(-1px);
+}
+
+/* Template card "Choisir" button */
+.btn-template-choose {
+  margin-top: 4px;
+  width: 100%;
+  background-color: var(--color-text);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 0;
   font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.15s, transform 0.1s;
+}
+.btn-template-choose:hover {
+  background-color: #333;
+  transform: translateY(-1px);
+}
+
+/* Overlay "Choisir ce modèle" button */
+.btn-overlay-choose {
+  background-color: #fff;
+  color: var(--color-text);
+  border: none;
+  border-radius: 8px;
+  padding: 9px 22px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.15s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.btn-overlay-choose:hover {
+  background-color: var(--color-bg);
+  transform: scale(1.04);
+}
+
+/* Category filter tabs */
+.btn-tab {
+  font-size: 0.84rem;
+  padding: 6px 15px;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  background-color: var(--color-surface);
+  color: var(--color-text-muted);
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.btn-tab:hover {
+  background-color: var(--color-surface-2);
+  color: var(--color-text);
+}
+.btn-tab-active {
+  font-size: 0.84rem;
+  padding: 6px 15px;
+  border-radius: 20px;
+  border: 1px solid var(--color-text);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  background-color: var(--color-text);
+  color: #fff;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.btn-tab-active:hover { opacity: 0.88; }
+
+.tab-count {
+  font-size: 0.72rem;
+  background-color: var(--color-surface-2);
+  border-radius: 10px;
+  padding: 0 6px;
+  line-height: 17px;
+  display: inline-block;
+}
+.tab-count-active {
+  font-size: 0.72rem;
+  background-color: rgba(255,255,255,0.22);
+  border-radius: 10px;
+  padding: 0 6px;
+  line-height: 17px;
+  display: inline-block;
+}
+
+/* Back button — used everywhere (editor top bar, onboarding, improve) */
+.btn-editor-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--color-text);
+  text-decoration: none;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  padding: 7px 14px;
+  background-color: #fff;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  flex-shrink: 0;
+  font-family: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.btn-editor-back:hover {
+  background-color: var(--color-text);
+  border-color: var(--color-text);
+  color: #fff;
+}
+.btn-editor-back:active {
+  opacity: 0.85;
+}
+
+/* Step nav buttons (add/save in editor steps) */
+.btn-step-primary {
+  background-color: var(--color-text);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn-step-primary:hover { opacity: 0.82; transform: translateY(-1px); }
+
+.btn-step-secondary {
+  background-color: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition: opacity 0.15s;
+  font-family: inherit;
+  transition: background-color 0.15s, color 0.15s;
 }
-.btn-dark-opus:hover { opacity: 0.85; }
+.btn-step-secondary:hover {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+}
 
 /* ── Hexagon decorations ── */
 .hex-group {
@@ -76,14 +237,14 @@ body {
 }
 
 /* ── Section spacing ── */
-.section-gap { padding: 80px 0; }
+.section-gap    { padding: 80px 0; }
 .section-gap-sm { padding: 48px 0; }
 
 /* ── FAQ accordion ── */
 .faq-item {
   background-color: var(--color-surface);
   border-radius: 12px;
-  padding: 1rem 1.25rem;
+  padding: 1.05rem 1.25rem;
   cursor: pointer;
   transition: background 0.15s;
 }
@@ -105,4 +266,73 @@ body {
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--color-text) !important;
+}
+
+/* ── RTL support ── */
+[dir="rtl"] .navbar-opus .container {
+  flex-direction: row-reverse;
+}
+[dir="rtl"] .ms-auto { margin-left: unset !important; margin-right: auto !important; }
+[dir="rtl"] .me-auto { margin-right: unset !important; margin-left: auto !important; }
+[dir="rtl"] body {
+  font-family: 'Segoe UI', 'Arial', system-ui, sans-serif;
+}
+
+/* ── Section spacing responsive ── */
+@media (max-width: 768px) {
+  .section-gap    { padding: 48px 0; }
+  .section-gap-sm { padding: 28px 0; }
+}
+@media (max-width: 480px) {
+  .section-gap    { padding: 36px 0; }
+  .section-gap-sm { padding: 20px 0; }
+}
+
+/* ── Form field layout ── */
+.field-half { width: calc(50% - 7px); }
+.field-full { width: 100%; }
+@media (max-width: 600px) {
+  .field-half { width: 100%; }
+}
+
+/* ── Builder grid: prevent overflow on narrow screens ── */
+@media (max-width: 440px) {
+  .builder-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+/* ── Editor main layout: collapse below 960px ── */
+@media (max-width: 960px) {
+  .editor-main-layout {
+    flex-direction: column !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+  .editor-form-col {
+    flex: none !important;
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--color-border);
+    overflow-y: visible !important;
+    padding-bottom: 40px !important;
+  }
+  .editor-form-col > div {
+    max-width: 620px !important;
+    padding: 0 20px !important;
+  }
+  .editor-preview-panel {
+    display: none !important;
+  }
+}
+
+/* ── Navbar: reduce gap on small screens ── */
+@media (max-width: 480px) {
+  .navbar-opus .container { gap: 8px; }
+}
+
+/* ── Step pills: compact on small screens ── */
+@media (max-width: 480px) {
+  .step-pill-label { display: none; }
 }

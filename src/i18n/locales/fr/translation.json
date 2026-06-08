@@ -1,0 +1,329 @@
+{
+  "common": {
+    "next": "Suivant",
+    "back": "Précédent",
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "choose": "Choisir",
+    "preview": "Aperçu",
+    "popular": "Populaire",
+    "loading": "Chargement...",
+    "add": "Ajouter",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "close": "Fermer",
+    "optional": "Optionnel",
+    "required": "Obligatoire"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "createCV": "Créer mon CV",
+    "myAccount": "Mon compte",
+    "myCVs": "Mes CVs",
+    "settings": "Paramètres"
+  },
+  "languages": {
+    "fr": "Français",
+    "en": "English",
+    "ar": "العربية"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Autre Chose",
+      "title": "Créer un CV professionnel en quelques clicks!",
+      "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+      "cta": "Créer mon CV",
+      "improve": "Améliorer mon CV"
+    },
+    "preview": {
+      "progress": "complété"
+    },
+    "whatCanYouDo": "What can you do with opus?",
+    "featureCard": {
+      "title": "Section Title",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    "whyOpus": {
+      "eyebrow": "Autre Chose",
+      "title": "Pourquoi créer mon CV avec Opus?",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+    },
+    "section": {
+      "eyebrow": "Autre Chose",
+      "title": "Section Title",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam."
+    },
+    "support": {
+      "eyebrow": "Vous avez toujours des questions?",
+      "title": "Notre équipes de support Clients est toujours à l'écoute",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+      "faqTitle": "Question numéro un ?",
+      "faqBody": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore. Ut enim ad minim veniam.",
+      "faq2": "Question numéro deux ?",
+      "faq3": "Question numéro trois ?",
+      "faq4": "Question numéro quatre ?"
+    }
+  },
+  "builder": {
+    "title": "Choisir un modèle",
+    "subtitle": "Entrez votre nom pour voir les aperçus en temps réel.",
+    "firstNamePlaceholder": "Prénom",
+    "lastNamePlaceholder": "Nom",
+    "chooseBtn": "Choisir",
+    "chooseTemplate": "Choisir ce modèle",
+    "noTemplates": "Aucun modèle dans cette catégorie.",
+    "colorPalette": "Couleur du thème",
+    "templateCount_one": "{{count}} modèle",
+    "templateCount_other": "{{count}} modèles"
+  },
+  "categories": {
+    "all": "Tous les modèles",
+    "ats": "ATS",
+    "simple": "Simple",
+    "moderne": "Moderne",
+    "une-colonne": "Une colonne",
+    "avec-photo": "Avec photo",
+    "professionnel": "Professionnel",
+    "creatif": "Créatif"
+  },
+  "colors": {
+    "blue": "Bleu",
+    "green": "Vert",
+    "red": "Rouge",
+    "purple": "Violet",
+    "gray": "Gris",
+    "black": "Noir",
+    "teal": "Vert émeraude",
+    "orange": "Or"
+  },
+  "onboarding": {
+    "title": "Comment souhaitez-vous commencer ?",
+    "subtitle": "Vous avez sélectionné le modèle <strong>{{template}}</strong>. Choisissez une option pour continuer.",
+    "import": {
+      "title": "Importer un CV existant",
+      "desc": "Importez votre CV en PDF ou DOCX. Nous analyserons le document et pré-remplirons les informations automatiquement.",
+      "dropzone": "Glissez-déposez votre fichier ici",
+      "or": "ou",
+      "browse": "Parcourir les fichiers",
+      "formats": "Formats acceptés : PDF, DOCX (max 5 Mo)",
+      "analyzing": "Analyse du document en cours...",
+      "success": "Document analysé avec succès !",
+      "aiHint": "L'extraction intelligente par IA sera disponible prochainement.",
+      "continue": "Continuer vers l'éditeur"
+    },
+    "scratch": {
+      "title": "Créer depuis zéro",
+      "desc": "Commencez avec un CV vierge et remplissez les informations étape par étape grâce à notre assistant.",
+      "cta": "Commencer",
+      "badge": "Recommandé"
+    }
+  },
+  "editor": {
+    "title": "Éditeur de CV",
+    "progressLabel": "Complété",
+    "livePreview": "Aperçu en direct",
+    "backToTemplates": "Retour aux modèles",
+    "steps": {
+      "personalInfo": "Coordonnées",
+      "summary": "Résumé",
+      "experience": "Expérience",
+      "education": "Formation",
+      "skills": "Compétences",
+      "finalize": "Finaliser"
+    },
+    "personalInfo": {
+      "title": "Vos coordonnées",
+      "subtitle": "Ces informations apparaîtront en haut de votre CV.",
+      "firstName": "Prénom",
+      "lastName": "Nom de famille",
+      "email": "Adresse email",
+      "phone": "Numéro de téléphone",
+      "address": "Adresse",
+      "city": "Ville",
+      "country": "Pays",
+      "title_field": "Titre professionnel",
+      "title_hint": "Ex: Ingénieur Logiciel Senior, Chef de Projet...",
+      "linkedin": "Profil LinkedIn",
+      "website": "Site web / Portfolio",
+      "photo": "Photo de profil",
+      "addPhoto": "Ajouter",
+      "photoHint": "JPG, PNG ou WEBP · Fond neutre recommandé.",
+      "removePhoto": "Supprimer la photo"
+    },
+    "summary": {
+      "title": "Résumé professionnel",
+      "subtitle": "Un court paragraphe qui résume votre parcours et vos ambitions.",
+      "placeholder": "Décrivez votre profil professionnel en 2 à 4 phrases concises...",
+      "hint": "Un bon résumé met en valeur vos compétences clés et attire immédiatement l'attention du recruteur.",
+      "charCount": "{{count}} caractères"
+    },
+    "experience": {
+      "title": "Expérience professionnelle",
+      "subtitle": "Ajoutez vos expériences les plus récentes en premier.",
+      "addEntry": "Ajouter une expérience",
+      "jobTitle": "Intitulé du poste",
+      "company": "Entreprise",
+      "location": "Lieu",
+      "startDate": "Date de début",
+      "endDate": "Date de fin",
+      "current": "Poste actuel",
+      "description": "Description",
+      "bulletPlaceholder": "Décrivez une réalisation ou responsabilité...",
+      "addBullet": "+ Ajouter une ligne",
+      "noEntries": "Aucune expérience ajoutée pour le moment.",
+      "editEntry": "Modifier l'expérience",
+      "dateError": "La date de fin doit être postérieure à la date de début."
+    },
+    "education": {
+      "title": "Formation",
+      "subtitle": "Ajoutez vos diplômes et formations académiques.",
+      "addEntry": "Ajouter une formation",
+      "degree": "Diplôme / Intitulé de la formation",
+      "school": "Établissement",
+      "location": "Lieu",
+      "startYear": "Année de début",
+      "endYear": "Année de fin",
+      "grade": "Mention / Note",
+      "noEntries": "Aucune formation ajoutée pour le moment.",
+      "editEntry": "Modifier la formation",
+      "yearError": "L'année de fin doit être supérieure ou égale à l'année de début."
+    },
+    "skills": {
+      "title": "Compétences",
+      "subtitle": "Listez vos compétences techniques et transversales.",
+      "addSkill": "Ajouter",
+      "skillPlaceholder": "Ex: React, Python, Gestion de projet...",
+      "skillsAdded": "{{count}} compétence(s) ajoutée(s)",
+      "languages": "Langues",
+      "addLanguage": "Ajouter une langue",
+      "languageName": "Langue",
+      "languageLevel": "Niveau",
+      "levels": {
+        "native": "Natif / Bilingue",
+        "c2": "Courant (C2)",
+        "c1": "Avancé (C1)",
+        "b2": "Intermédiaire (B2)",
+        "b1": "Seuil (B1)",
+        "a2": "Élémentaire (A2)"
+      },
+      "certifications": "Certifications",
+      "addCertification": "Ajouter une certification",
+      "certPlaceholder": "Ex: AWS Solutions Architect — 2024"
+    },
+    "finalize": {
+      "title": "Finalisez votre CV",
+      "subtitle": "Vérifiez l'aperçu et téléchargez votre CV.",
+      "colorTitle": "Couleur du thème",
+      "colorHint": "La couleur s'applique à l'ensemble du template.",
+      "downloadPDF": "Télécharger en PDF",
+      "downloadPDFSoon": "Télécharger le PDF",
+      "pdfNote": "Téléchargez votre CV en PDF haute qualité.",
+      "pdfGenerating": "Génération...",
+      "tips": "Conseils pour un CV optimal",
+      "tip1": "Votre CV ne dépasse pas 2 pages.",
+      "tip2": "Utilisez des verbes d'action pour décrire vos expériences.",
+      "tip3": "Adaptez votre résumé à chaque offre d'emploi.",
+      "tip4": "Vérifiez l'orthographe et la cohérence des dates.",
+      "completion": "Votre CV est complété à {{percent}}%."
+    }
+  },
+  "progress": {
+    "title": "Progression",
+    "sections": {
+      "personalInfo": "Coordonnées",
+      "summary": "Résumé",
+      "experience": "Expérience",
+      "education": "Formation",
+      "skills": "Compétences"
+    }
+  },
+  "about": {
+    "eyebrow": "À propos",
+    "title": "About us",
+    "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  },
+  "footer": {
+    "description": "La plateforme de création de CV professionnels.",
+    "links": {
+      "about": "À propos",
+      "contact": "Contact",
+      "terms": "Conditions d'utilisation",
+      "privacy": "Politique de confidentialité"
+    },
+    "rights": "© 2025 Société digital. Tous droits réservés"
+  },
+  "improve": {
+    "title": "Améliorer mon CV",
+    "subtitle": "Importez votre CV existant (PDF ou DOCX). Nous l'analysons et pré-remplissons toutes les sections, prêt à être retravaillé avec un nouveau modèle.",
+    "backToHome": "Retour à l'accueil",
+    "pipeline": {
+      "input": "Votre CV",
+      "extract": "Extraction",
+      "analyze": "Analyse",
+      "output": "Profil rempli"
+    },
+    "steps": {
+      "extract": "Extraction du texte...",
+      "analyze": "Analyse de la structure...",
+      "identify": "Identification des sections...",
+      "map": "Conversion vers votre profil..."
+    },
+    "dropzone": {
+      "title": "Glissez votre CV ici",
+      "subtitle": "ou cliquez pour parcourir vos fichiers",
+      "maxSize": "Taille maximale : 10 Mo"
+    },
+    "loading": "Analyse en cours…",
+    "done": {
+      "title": "Analyse terminée !",
+      "importedName": "CV de {{name}} importé avec succès.",
+      "experiences": "Expériences",
+      "education": "Formations",
+      "skills": "Compétences",
+      "languages": "Langues",
+      "ready": "Toutes vos informations ont été extraites et sont prêtes à être utilisées. Choisissez maintenant un modèle pour votre nouveau CV.",
+      "cta": "Choisir un modèle"
+    },
+    "error": {
+      "title": "Erreur lors de l'analyse",
+      "retry": "Réessayer",
+      "NO_TEXT": "Ce document ne contient pas de texte extractible. Il s'agit probablement d'un scan (PDF image). Essayez un PDF avec du texte sélectionnable ou un fichier DOCX. Note : les CV générés par cette application ne sont pas réimportables (format image).",
+      "UNSUPPORTED_FORMAT": "Format non supporté. Utilisez un fichier PDF ou DOCX.",
+      "FILE_TOO_LARGE": "Fichier trop volumineux. Maximum : 10 Mo.",
+      "NO_FILE": "Aucun fichier sélectionné.",
+      "generic": "Une erreur est survenue. Vérifiez votre fichier et réessayez."
+    },
+    "privacy": "Votre document est traité localement dans votre navigateur — aucune donnée n'est envoyée à un serveur."
+  },
+  "cv": {
+    "sections": {
+      "profile": "Profil",
+      "experience": "Expérience professionnelle",
+      "education": "Formation",
+      "skills": "Compétences",
+      "languages": "Langues",
+      "certifications": "Certifications",
+      "about": "À propos",
+      "summary": "Résumé exécutif",
+      "educationSkills": "Formation & Compétences",
+      "contact": "Contact",
+      "stack": "Stack",
+      "aboutCode": "a_propos",
+      "experienceCode": "experience",
+      "educationCode": "formation",
+      "certificationsCode": "certifications"
+    },
+    "labels": {
+      "email": "Email",
+      "phone": "Téléphone",
+      "location": "Lieu",
+      "linkedin": "LinkedIn",
+      "website": "Site web",
+      "educationUpper": "FORMATION",
+      "skillsUpper": "COMPÉTENCES",
+      "languagesUpper": "LANGUES"
+    }
+  }
+}
