@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { CATEGORIES, TEMPLATES, ACCENT_COLORS } from '../data/templates'
 import TemplatePreview from '../components/TemplatePreview'
-import { useCVDispatch } from '../store/CVContext'
+import { useCVDispatch, useCVState } from '../store/CVContext'
 import { ACTIONS } from '../store/cvReducer'
 
 const PREVIEW_W = 380
@@ -13,9 +13,10 @@ export default function Builder() {
   const { t }        = useTranslation()
   const navigate     = useNavigate()
   const dispatch     = useCVDispatch()
+  const { personalInfo } = useCVState()
 
-  const [firstName,       setFirstName]       = useState('')
-  const [lastName,        setLastName]         = useState('')
+  const [firstName,       setFirstName]       = useState(personalInfo.firstName || '')
+  const [lastName,        setLastName]         = useState(personalInfo.lastName || '')
   const [activeCategory,  setActiveCategory]   = useState('all')
   const [hovered,         setHovered]          = useState(null)
   const [selectedColors,  setSelectedColors]   = useState({})
@@ -33,6 +34,7 @@ export default function Builder() {
     const color = selectedColors[tpl.id] || tpl.defaultColor
     dispatch({ type: ACTIONS.SET_TEMPLATE,     payload: tpl.id })
     dispatch({ type: ACTIONS.SET_ACCENT_COLOR, payload: color  })
+    dispatch({ type: ACTIONS.UPDATE_PERSONAL_INFO, payload: { firstName: firstName.trim(), lastName: lastName.trim() } })
     navigate(`/onboarding/${tpl.id}`)
   }
 

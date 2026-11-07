@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useId } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Camera, ChevronDown, ChevronLeft, ChevronRight, Download, X } from 'lucide-react'
 import { useCVState, useCVDispatch } from '../../../store/CVContext'
@@ -17,17 +17,6 @@ export default function StepCoordonnees({ onNext }) {
 
   function update(field, value) {
     dispatch({ type: ACTIONS.UPDATE_PERSONAL_INFO, payload: { [field]: value } })
-  }
-
-  async function handlePhotoUpload(e) {
-    const file = e.target.files?.[0]
-    if (!file) return
-    const compressed = await compressImage(file, 400)
-    dispatch({ type: ACTIONS.UPDATE_PERSONAL_INFO, payload: { photo: compressed } })
-  }
-
-  function removePhoto() {
-    dispatch({ type: ACTIONS.UPDATE_PERSONAL_INFO, payload: { photo: null } })
   }
 
   const fields = [
@@ -51,61 +40,8 @@ export default function StepCoordonnees({ onNext }) {
         subtitle={t('editor.personalInfo.subtitle')}
       />
 
-      {/* Photo upload — only for photo templates */}
-      {isPhotoTemplate && (
-        <div style={{ marginBottom: 22 }}>
-          <label style={labelStyle}>{t('editor.personalInfo.photo')}</label>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
-            <label
-              htmlFor="photo-upload"
-              style={{
-                width: 90, height: 90, borderRadius: '50%', flexShrink: 0,
-                border: info.photo ? `2px solid var(--color-text)` : '2px dashed var(--color-border)',
-                backgroundColor: 'var(--color-surface)',
-                cursor: 'pointer', overflow: 'hidden',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                transition: 'border-color 0.15s',
-              }}
-            >
-              {info.photo ? (
-                <img
-                  src={info.photo}
-                  alt="profil"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
-              ) : (
-                <div style={{ textAlign: 'center', color: 'var(--color-text-muted)', lineHeight: 1.3 }}>
-                  <Camera size={22} style={{ display: 'block', margin: '0 auto 4px' }} />
-                  <span style={{ fontSize: '0.68rem' }}>{t('editor.personalInfo.addPhoto')}</span>
-                </div>
-              )}
-            </label>
-            <input
-              id="photo-upload"
-              type="file"
-              accept="image/*"
-              style={{ display: 'none' }}
-              onChange={handlePhotoUpload}
-            />
-            <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
-              <div>{t('editor.personalInfo.photoHint')}</div>
-              {info.photo && (
-                <button
-                  onClick={removePhoto}
-                  style={{
-                    marginTop: 6, fontSize: '0.75rem', color: '#dc2626',
-                    background: 'none', border: 'none', cursor: 'pointer',
-                    padding: 0, fontFamily: 'inherit',
-                    display: 'flex', alignItems: 'center', gap: 4,
-                  }}
-                >
-                  <X size={12} />{t('editor.personalInfo.removePhoto')}
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Photo — uniquement pour les modèles avec photo */}
+      {isPhotoTemplate && <PhotoField />}
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14 }}>
         {fields.map(f => (
@@ -275,6 +211,80 @@ function compressImage(file, maxWidth) {
 }
 
 // ── Shared sub-components ──
+
+/** Champ photo réutilisable (étape Coordonnées et étape Modèle) */
+export function PhotoField() {
+  const { t }    = useTranslation()
+  const dispatch = useCVDispatch()
+  const info     = useCVState().personalInfo
+  const inputId  = useId()
+
+  async function handlePhotoUpload(e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const compressed = await compressImage(file, 400)
+    dispatch({ type: ACTIONS.UPDATE_PERSONAL_INFO, payload: { photo: compressed } })
+  }
+
+  function removePhoto() {
+    dispatch({ type: ACTIONS.UPDATE_PERSONAL_INFO, payload: { photo: null } })
+  }
+
+  return (
+    <div style={{ marginBottom: 22 }}>
+      <label style={labelStyle}>{t('editor.personalInfo.photo')}</label>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
+        <label
+          htmlFor={inputId}
+          style={{
+            width: 90, height: 90, borderRadius: '50%', flexShrink: 0,
+            border: info.photo ? `2px solid var(--color-text)` : '2px dashed var(--color-border)',
+            backgroundColor: 'var(--color-surface)',
+            cursor: 'pointer', overflow: 'hidden',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            transition: 'border-color 0.15s',
+          }}
+        >
+          {info.photo ? (
+            <img
+              src={info.photo}
+              alt="profil"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          ) : (
+            <div style={{ textAlign: 'center', color: 'var(--color-text-muted)', lineHeight: 1.3 }}>
+              <Camera size={22} style={{ display: 'block', margin: '0 auto 4px' }} />
+              <span style={{ fontSize: '0.68rem' }}>{t('editor.personalInfo.addPhoto')}</span>
+            </div>
+          )}
+        </label>
+        <input
+          id={inputId}
+          type="file"
+          accept="image/*"
+          style={{ display: 'none' }}
+          onChange={handlePhotoUpload}
+        />
+        <div style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
+          <div>{t('editor.personalInfo.photoHint')}</div>
+          {info.photo && (
+            <button
+              onClick={removePhoto}
+              style={{
+                marginTop: 6, fontSize: '0.75rem', color: '#dc2626',
+                background: 'none', border: 'none', cursor: 'pointer',
+                padding: 0, fontFamily: 'inherit',
+                display: 'flex', alignItems: 'center', gap: 4,
+              }}
+            >
+              <X size={12} />{t('editor.personalInfo.removePhoto')}
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export function StepHeader({ title, subtitle }) {
   return (

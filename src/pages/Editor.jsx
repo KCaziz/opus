@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useCVState, useCVDispatch } from '../store/CVContext'
 import { ACTIONS } from '../store/cvReducer'
 import WizardLayout from '../components/editor/WizardLayout'
@@ -8,6 +6,7 @@ import StepResume      from '../components/editor/steps/StepResume'
 import StepExperience  from '../components/editor/steps/StepExperience'
 import StepFormation   from '../components/editor/steps/StepFormation'
 import StepCompetences from '../components/editor/steps/StepCompetences'
+import StepModele      from '../components/editor/steps/StepModele'
 import StepFinaliser   from '../components/editor/steps/StepFinaliser'
 
 const STEPS = [
@@ -16,18 +15,14 @@ const STEPS = [
   StepExperience,
   StepFormation,
   StepCompetences,
-  StepFinaliser,
+  StepModele,      // « Choisissez » : le modèle vient à la fin
+  StepFinaliser,   // « Téléchargez »
 ]
 
 export default function Editor() {
-  const navigate = useNavigate()
   const state    = useCVState()
   const dispatch = useCVDispatch()
   const step     = state.currentStep
-
-  useEffect(() => {
-    if (!state.templateId) navigate('/builder')
-  }, [state.templateId, navigate])
 
   function goTo(idx)   { dispatch({ type: ACTIONS.SET_STEP, payload: idx }) }
   function goNext()    { goTo(Math.min(step + 1, STEPS.length - 1)) }
@@ -40,6 +35,7 @@ export default function Editor() {
       <StepComponent
         onNext={goNext}
         onBack={step > 0 ? goBack : undefined}
+        onGoTo={goTo}
       />
     </WizardLayout>
   )

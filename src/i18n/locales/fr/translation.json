@@ -122,16 +122,17 @@
   },
   "editor": {
     "title": "Éditeur de CV",
-    "progressLabel": "Complété",
+    "progressLabel": "Complétude",
     "livePreview": "Aperçu en direct",
-    "backToTemplates": "Retour aux modèles",
+    "backToTemplates": "Accueil",
     "steps": {
       "personalInfo": "Coordonnées",
       "summary": "Résumé",
       "experience": "Expérience",
       "education": "Formation",
       "skills": "Compétences",
-      "finalize": "Finaliser"
+      "template": "Modèle",
+      "finalize": "Télécharger"
     },
     "personalInfo": {
       "title": "Vos coordonnées",
@@ -213,8 +214,8 @@
       "certPlaceholder": "Ex: AWS Solutions Architect — 2024"
     },
     "finalize": {
-      "title": "Finalisez votre CV",
-      "subtitle": "Vérifiez l'aperçu et téléchargez votre CV.",
+      "title": "Téléchargez votre CV",
+      "subtitle": "Un PDF propre, prêt à envoyer.",
       "colorTitle": "Couleur du thème",
       "colorHint": "La couleur s'applique à l'ensemble du template.",
       "downloadPDF": "Télécharger en PDF",
@@ -227,6 +228,38 @@
       "tip3": "Adaptez votre résumé à chaque offre d'emploi.",
       "tip4": "Vérifiez l'orthographe et la cohérence des dates.",
       "completion": "Votre CV est complété à {{percent}}%."
+    },
+    "template": {
+      "title": "Choisissez votre modèle",
+      "subtitle": "Le modèle vient à la fin, une fois le contenu prêt. Changez-en autant que vous voulez, rien n’est perdu.",
+      "withPhoto": "Avec photo",
+      "photoNeeded": "Le modèle « {{name}} » affiche une photo. Ajoutez-la ici."
+    },
+    "backToDownload": "Aller au téléchargement",
+    "advice": {
+      "title": "Comment améliorer votre CV",
+      "subtitle_one": "{{count}} point à améliorer. Cliquez sur « Corriger » pour aller directement à la section.",
+      "subtitle_other": "{{count}} points à améliorer. Cliquez sur « Corriger » pour aller directement à la section.",
+      "done": "Toutes les sections essentielles sont remplies.",
+      "allGood": "Votre CV est complet. Relisez l’orthographe et la cohérence des dates avant d’envoyer.",
+      "fix": "Corriger",
+      "items": {
+        "title": "Ajoutez un titre professionnel (ex. « Assistante commerciale ») : c’est la première ligne que lit le recruteur.",
+        "phone": "Ajoutez votre numéro de téléphone : c’est le moyen le plus rapide de vous joindre.",
+        "email": "Ajoutez votre adresse e-mail.",
+        "city": "Indiquez votre ville : les recruteurs filtrent souvent par wilaya.",
+        "summaryEmpty": "Rédigez un résumé de 2 à 4 phrases : qui vous êtes, ce que vous savez faire, le poste que vous visez.",
+        "summaryShort": "Développez votre résumé ({{count}}/100 caractères minimum) : ajoutez une compétence clé ou un résultat.",
+        "experienceEmpty": "Ajoutez au moins une expérience : stage, job étudiant, bénévolat ou projet de fin d’études comptent.",
+        "experienceNoBullets": "Décrivez vos missions pour « {{name}} » : 2 à 3 lignes, en commençant par un verbe d’action.",
+        "experienceNoDates": "Ajoutez les dates de « {{name}} ».",
+        "experienceOne": "Une seule expérience : ajoutez un stage, un projet ou une activité associative si vous en avez.",
+        "educationEmpty": "Ajoutez votre formation : diplôme, établissement et années.",
+        "educationNoYears": "Ajoutez les années de « {{name}} ».",
+        "skillsFew": "Ajoutez au moins 3 compétences ({{count}}/3) : outils, logiciels, savoir-faire concrets.",
+        "languagesEmpty": "Ajoutez vos langues et votre niveau (arabe, français, anglais…).",
+        "photoMissing": "Le modèle « {{name}} » affiche une photo : ajoutez-la, ou choisissez un modèle sans photo."
+      }
     }
   },
   "progress": {
@@ -252,7 +285,7 @@
       "terms": "Conditions d'utilisation",
       "privacy": "Politique de confidentialité"
     },
-    "rights": "© 2025 Société digital. Tous droits réservés"
+    "rights": "© 2026 Opus. Tous droits réservés."
   },
   "improve": {
     "title": "Améliorer mon CV",
@@ -324,6 +357,148 @@
       "educationUpper": "FORMATION",
       "skillsUpper": "COMPÉTENCES",
       "languagesUpper": "LANGUES"
+    }
+  },
+  "landing": {
+    "nav": {
+      "contact": "Contactez-nous",
+      "theme": "Changer de thème",
+      "cta": "Créer mon CV"
+    },
+    "hero": {
+      "label": "451 personnes créent leur CV en ce moment",
+      "title": "Votre CV, clair dès la première ligne.",
+      "subtitle": "Pas de compte, pas de page blanche. OPUS vous guide section par section.",
+      "namePlaceholder": "Votre nom complet",
+      "jobPlaceholder": "Poste visé",
+      "cta": "Créer mon CV →",
+      "ctaContinue": "Continuer mon CV →",
+      "mini": "Gratuit à créer · paiement unique à l’export · 9 451 CV créés cette semaine"
+    },
+    "lead": {
+      "title": "Un CV clair,",
+      "titleEm": "en quatre étapes.",
+      "subtitle": "Un recruteur passe quelques secondes sur chaque CV. Chaque étape sert à ce que le vôtre se lise d’un coup d’œil."
+    },
+    "preview": {
+      "window": "opus · Mon CV",
+      "score": "Complétude 64 %",
+      "download": "Télécharger",
+      "sections": [
+        "Infos",
+        "Expérience",
+        "Formation",
+        "Compétences",
+        "Modèle"
+      ],
+      "tip": "Conseil : un résultat chiffré vaut mieux qu’une tâche.",
+      "templates": [
+        "Classique",
+        "Moderne",
+        "Sobre"
+      ],
+      "sampleName": "Amel Boudiaf",
+      "sampleJob": "Assistante commerciale",
+      "placeholder": "Placeholder · capture de l’éditeur OPUS"
+    },
+    "steps": [
+      {
+        "title": "Remplissez",
+        "desc": "Section par section, avec un conseil à chaque champ et un aperçu en direct. Pas de page blanche."
+      },
+      {
+        "title": "Vérifiez",
+        "desc": "Le score de complétude montre ce qu’un recruteur ne trouvera pas, avant qu’il ne le cherche."
+      },
+      {
+        "title": "Choisissez",
+        "desc": "Le modèle vient à la fin, une fois le contenu prêt. Changez-en autant que vous voulez, rien n’est perdu."
+      },
+      {
+        "title": "Téléchargez",
+        "desc": "Un PDF propre, prêt à envoyer. Un seul paiement à l’export, par Dahabia ou CIB. Aucun abonnement."
+      }
+    ],
+    "benefits": {
+      "title": "Pensé pour votre recherche d’emploi.",
+      "subtitle": "Tout ce qu’il faut pour passer d’un brouillon à un CV qu’un recruteur lit jusqu’au bout.",
+      "cards": [
+        {
+          "kicker": "Guide",
+          "title": "Jamais de page blanche",
+          "desc": "Chaque section vous dit quoi écrire, même pour un premier CV."
+        },
+        {
+          "kicker": "Clarté",
+          "title": "Lu en quelques secondes",
+          "desc": "L’essentiel de votre parcours se voit dès le premier coup d’œil."
+        },
+        {
+          "kicker": "Complétude",
+          "title": "Rien d’important oublié",
+          "desc": "Un score signale ce qu’il reste à compléter avant l’export."
+        },
+        {
+          "kicker": "Simplicité",
+          "title": "Sans compte pour débuter",
+          "desc": "Un seul paiement, à l’export. Aucun abonnement."
+        }
+      ]
+    },
+    "faq": {
+      "title": "Vous avez des questions ?",
+      "subtitle": "Se lancer dans la recherche d’emploi peut être intimidant. Si vous bloquez sur une section, une vraie personne vous répond.",
+      "contact": "Nous contacter",
+      "items": [
+        {
+          "q": "Dois-je créer un compte pour commencer ?",
+          "a": "Non. Vous remplissez votre CV immédiatement. Un compte n’est nécessaire que pour sauvegarder ou exporter."
+        },
+        {
+          "q": "Est-ce gratuit ?",
+          "a": "Créer et modifier votre CV est gratuit. Seul l’export PDF est payant, en un seul paiement."
+        },
+        {
+          "q": "Comment puis-je payer ?",
+          "a": "Par carte Dahabia ou CIB, directement depuis la plateforme."
+        },
+        {
+          "q": "Puis-je l’utiliser depuis mon téléphone ?",
+          "a": "Oui. OPUS fonctionne directement dans le navigateur mobile, sans installation."
+        },
+        {
+          "q": "Puis-je modifier mon CV après l’export ?",
+          "a": "Oui. Vos informations restent sauvegardées et modifiables à tout moment."
+        }
+      ]
+    },
+    "final": {
+      "title": "Votre prochain emploi commence par",
+      "titleEm": "un CV clair.",
+      "cta": "Créer mon CV →"
+    },
+    "footer": {
+      "rights": "© 2026 Opus. Tous droits réservés.",
+      "contact": "Nous contacter",
+      "terms": "Conditions d’utilisation",
+      "privacy": "Confidentialité"
+    },
+    "proof": {
+      "title": "Des candidats, comme vous.",
+      "quotes": [
+        {
+          "quote": "« J’ai enfin compris ce qu’il fallait mettre dans mon CV. »",
+          "who": "Yasmine, jeune diplômée"
+        },
+        {
+          "quote": "« Simple, rapide, et le résultat a l’air professionnel. »",
+          "who": "Amine, premier emploi"
+        },
+        {
+          "quote": "« Le score de complétude m’a évité d’oublier l’essentiel. »",
+          "who": "Nadia, reconversion"
+        }
+      ]
     }
   }
 }

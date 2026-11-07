@@ -1,229 +1,273 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Sparkles, ChevronDown, ChevronUp } from 'lucide-react'
-import HexDecoration from '../components/HexDecoration'
+import Logo from '../components/Logo'
+import { useCVDispatch, useCVState } from '../store/CVContext'
+import { ACTIONS } from '../store/cvReducer'
+import './landing.css'
 
-function Box({ style, children, className = '' }) {
-  return (
-    <div className={`placeholder-box ${className}`} style={style}>
-      {children}
-    </div>
-  )
+const THEME_KEY = 'opus-theme'
+
+function readTheme() {
+  try { return localStorage.getItem(THEME_KEY) === 'dark' ? 'dark' : 'light' } catch { return 'light' }
 }
 
-function FaqItem({ question, open }) {
-  return (
-    <div className="faq-item d-flex justify-content-between align-items-center gap-3">
-      <span style={{ fontSize: '0.9rem', fontWeight: 500 }}>{question}</span>
-      {open ? <ChevronUp size={14} style={{ flexShrink: 0 }} /> : <ChevronDown size={14} style={{ flexShrink: 0 }} />}
-    </div>
-  )
-}
+const ICONS = [
+  <path key="g" d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z" />,
+  <g key="c"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" /></g>,
+  <g key="s"><circle cx="12" cy="12" r="9" /><path d="M8 12.5l3 3 5-6" /></g>,
+  <path key="f" d="M13 2L4 14h7l-1 8 9-12h-7z" />,
+]
 
 export default function Home() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
+  const dispatch = useCVDispatch()
+  const cv = useCVState()
+
+  const [theme, setTheme] = useState(readTheme)
+  const [fullName, setFullName] = useState(
+    [cv.personalInfo.firstName, cv.personalInfo.lastName].filter(Boolean).join(' ')
+  )
+  const [jobTitle, setJobTitle] = useState(cv.personalInfo.title || '')
+  const [step, setStep] = useState(0)
+
+  // Arrivée depuis une autre page via /#faq
+  useEffect(() => {
+    if (window.location.hash) document.querySelector(window.location.hash)?.scrollIntoView()
+  }, [])
+
+  const pinRef = useRef(null)
+  const innerRef = useRef(null)
+  const barsRef = useRef([])
+
+  const steps = t('landing.steps', { returnObjects: true })
+  const cards = t('landing.benefits.cards', { returnObjects: true })
+  const quotes = t('landing.proof.quotes', { returnObjects: true })
+  const faq = t('landing.faq.items', { returnObjects: true })
+
+  function toggleTheme() {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    try { localStorage.setItem(THEME_KEY, next) } catch { /* stockage indisponible */ }
+  }
+
+  function start(e) {
+    e?.preventDefault()
+    const name = fullName.trim()
+    const [firstName = '', ...rest] = name.split(/\s+/).filter(Boolean)
+    dispatch({
+      type: ACTIONS.UPDATE_PERSONAL_INFO,
+      payload: { firstName, lastName: rest.join(' '), title: jobTitle.trim() },
+    })
+    dispatch({ type: ACTIONS.SET_STEP, payload: 0 })
+    navigate('/editor')
+  }
+
+  // Étapes pilotées par le scroll (section épinglée)
+  useEffect(() => {
+    const pin = pinRef.current
+    const inn = innerRef.current
+    if (!pin || !inn) return
+    let cur = -1
+    const topOff = () => parseFloat(getComputedStyle(inn).top) || 0
+    const span = () => Math.max(pin.offsetHeight - inn.offsetHeight, 1)
+    function tick() {
+      const r = pin.getBoundingClientRect()
+      const p = Math.min(Math.max((topOff() - r.top) / span(), 0), 0.9999)
+      const x = p * 4
+      const i = Math.floor(x)
+      if (i !== cur) { cur = i; setStep(i) }
+      barsRef.current.forEach((b, k) => {
+        if (b) b.style.height = (k < i ? 100 : k === i ? (x - i) * 100 : 0) + '%'
+      })
+    }
+    addEventListener('scroll', tick, { passive: true })
+    addEventListener('resize', tick)
+    tick()
+    return () => { removeEventListener('scroll', tick); removeEventListener('resize', tick) }
+  }, [])
+
+  function goToStep(k) {
+    const pin = pinRef.current, inn = innerRef.current
+    if (!pin || !inn) return
+    const topOff = parseFloat(getComputedStyle(inn).top) || 0
+    const span = pin.offsetHeight - inn.offsetHeight
+    const top = pin.getBoundingClientRect().top + window.scrollY - topOff + ((k + 0.05) / 4) * span
+    window.scrollTo({ top, behavior: 'smooth' })
+  }
+
+  const previewName = fullName.trim() || t('landing.preview.sampleName')
+  const previewJob = jobTitle.trim() || t('landing.preview.sampleJob')
 
   return (
-    <>
-      {/* ── HERO ── */}
-      <section className="section-gap" style={{ position: 'relative', overflow: 'hidden' }}>
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="row align-items-center">
-            <div className="col-lg-6">
-              <p className="label-tag mb-2">{t('home.hero.eyebrow')}</p>
-              <h1 style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.03em' }}>
-                {t('home.hero.title')}
-              </h1>
-              <p className="mt-3" style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', maxWidth: 440, lineHeight: 1.7 }}>
-                {t('home.hero.subtitle')}
-              </p>
-              <div className="mt-4 d-flex flex-wrap gap-3">
-                <Link to="/builder" className="btn-dark-opus d-inline-block text-decoration-none">
-                  {t('home.hero.cta')}
-                </Link>
-                <Link
-                  to="/improve"
-                  style={{
-                    display: 'inline-flex', alignItems: 'center', gap: 7,
-                    padding: '10px 22px', borderRadius: 8, fontWeight: 600,
-                    fontSize: '0.9rem', textDecoration: 'none',
-                    border: '1.5px solid var(--color-border)',
-                    backgroundColor: '#fff', color: 'var(--color-text)',
-                    transition: 'border-color 0.15s',
-                  }}
-                >
-                  <Sparkles size={15} />
-                  {t('home.hero.improve')}
-                </Link>
+    <div className="lp" data-theme={theme}>
+      <header className="lp-head">
+        <div className="lp-wrap lp-nav">
+          <Link to="/" aria-label="OPUS"><Logo height={26} className="lp-logo" /></Link>
+          <div>
+            <a href="#faq" className="lp-navlink">{t('landing.nav.contact')}</a>
+            <button className="lp-tg" onClick={toggleTheme} aria-label={t('landing.nav.theme')}>
+              {theme === 'dark' ? (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" /></svg>
+              )}
+            </button>
+            <Link to="/editor" className="lp-btn s">{t('landing.nav.cta')}</Link>
+          </div>
+        </div>
+      </header>
+
+      <div className="lp-top">
+        <div className="lp-bgfx" aria-hidden="true" />
+
+        <section className="lp-wrap lp-hero">
+          <div className="lp-lab"><i className="lp-dot" />{t('landing.hero.label')}</div>
+          <h1>{t('landing.hero.title')}</h1>
+          <p className="lp-sub">{t('landing.hero.subtitle')}</p>
+          <form className="lp-start" onSubmit={start}>
+            <input
+              value={fullName}
+              onChange={e => setFullName(e.target.value)}
+              placeholder={t('landing.hero.namePlaceholder')}
+              aria-label={t('landing.hero.namePlaceholder')}
+              autoComplete="name"
+            />
+            <i />
+            <input
+              value={jobTitle}
+              onChange={e => setJobTitle(e.target.value)}
+              placeholder={t('landing.hero.jobPlaceholder')}
+              aria-label={t('landing.hero.jobPlaceholder')}
+            />
+            <button className="lp-btn" type="submit">
+              {fullName.trim() ? t('landing.hero.ctaContinue') : t('landing.hero.cta')}
+            </button>
+          </form>
+          <p className="lp-mini">{t('landing.hero.mini')}</p>
+        </section>
+      </div>
+
+      <main>
+        <section className="lp-wrap lp-lead">
+          <h2>{t('landing.lead.title')} <em>{t('landing.lead.titleEm')}</em></h2>
+          <p className="lp-lsub">{t('landing.lead.subtitle')}</p>
+        </section>
+
+        <section className="lp-pin" ref={pinRef}>
+          <div className="lp-wrap lp-pin-in" ref={innerRef}>
+            <div className="lp-panel" aria-hidden="true">
+              <div className="lp-win" data-s={step + 1}>
+                <div className="lp-bar lp-mono">
+                  <i /><i /><i />
+                  <span>{t('landing.preview.window')}</span>
+                  <b className="lp-sc">{t('landing.preview.score')}</b>
+                  <b className="lp-exp">{t('landing.preview.download')}</b>
+                </div>
+                <div className="lp-body">
+                  <aside className="lp-side">
+                    {t('landing.preview.sections', { returnObjects: true }).map((s, k) => (
+                      <span key={s} className={k === 0 ? 'a' : ''}>{s}</span>
+                    ))}
+                  </aside>
+                  <div className="lp-form">
+                    <div className="lp-fld"><s /><s /></div>
+                    <div className="lp-fld"><s /><s /></div>
+                    <div className="lp-tip">{t('landing.preview.tip')}</div>
+                    <div className="lp-fld"><s /><s /></div>
+                  </div>
+                  <div className="lp-pv">
+                    <div className="lp-tpl lp-mono">
+                      {t('landing.preview.templates', { returnObjects: true }).map(s => <span key={s}>{s}</span>)}
+                    </div>
+                    <div className="lp-pp">
+                      <b>{previewName}</b>
+                      <em>{previewJob}</em>
+                      <s /><s style={{ width: '80%' }} /><s className="h" /><s /><s style={{ width: '70%' }} /><s /><s className="h" /><s style={{ width: '60%' }} /><s />
+                    </div>
+                  </div>
+                </div>
+                <div className="lp-ph">{t('landing.preview.placeholder')}</div>
+              </div>
+            </div>
+
+            <div className="lp-steps">
+              <div className="lp-tabs">
+                {steps.map((s, k) => (
+                  <button key={s.title} className={k === step ? 'on' : ''} onClick={() => goToStep(k)}>
+                    <span className="lp-pr"><b ref={el => { barsRef.current[k] = el }} /></span>
+                    <span>
+                      <span className="n">{String(k + 1).padStart(2, '0')}</span>
+                      <span className="t">{s.title}</span>
+                      <span className="d"><span className="dp">{s.desc}</span></span>
+                    </span>
+                  </button>
+                ))}
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div style={{ position: 'absolute', right: '-20px', top: '-20px', color: 'var(--color-text)', opacity: 0.12, pointerEvents: 'none' }}>
-          <HexDecoration rows={7} cols={6} size={32} gap={8} />
-        </div>
-      </section>
-
-      {/* ── PREVIEW / PROGRESS BAND ── */}
-      <section className="section-gap-sm" style={{ background: 'var(--color-surface)' }}>
-        <div className="container">
-          <div className="row g-4 align-items-center">
-            <div className="col-md-5">
-              <Box style={{ height: 240, position: 'relative' }}>
-                <div style={{
-                  position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)',
-                  background: 'rgba(26,26,24,0.78)', color: '#fff', borderRadius: 8,
-                  padding: '6px 14px', fontSize: '0.82rem', fontWeight: 600, letterSpacing: '0.04em',
-                  textAlign: 'center',
-                }}>
-                  60%<br />
-                  <span style={{ fontSize: '0.7rem', fontWeight: 400, opacity: 0.75 }}>
-                    {t('home.preview.progress')}
-                  </span>
-                </div>
-              </Box>
-            </div>
-            <div className="col-md-7">
-              <Box style={{ height: 240 }} />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── WHAT CAN YOU DO ── */}
-      <section className="section-gap">
-        <div className="container">
-          <h2 className="text-center mb-5" style={{ fontWeight: 700, fontSize: 'clamp(1.5rem, 3vw, 2.1rem)', letterSpacing: '-0.02em' }}>
-            {t('home.whatCanYouDo')}
-          </h2>
-
-          <div className="row g-4">
-            <div className="col-md-4">
-              <div className="card-opus" style={{ height: 280, position: 'relative' }}>
-                <div style={{
-                  position: 'absolute', bottom: 20, left: 20, right: 20,
-                  background: 'rgba(244,244,242,0.88)', borderRadius: 10,
-                  padding: '12px 14px', backdropFilter: 'blur(4px)',
-                }}>
-                  <p className="mb-1" style={{ fontSize: '0.85rem', fontWeight: 700 }}>
-                    {t('home.featureCard.title')}
-                  </p>
-                  <p style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', lineHeight: 1.5, margin: 0 }}>
-                    {t('home.featureCard.desc')}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4"><Box style={{ height: 280 }} /></div>
-            <div className="col-md-4"><Box style={{ height: 280 }} /></div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── WHY OPUS ── */}
-      <section className="section-gap" style={{ background: 'var(--color-surface)' }}>
-        <div className="container">
-          <div className="row g-5 align-items-center">
-            <div className="col-md-5">
-              <p className="label-tag mb-2">{t('home.whyOpus.eyebrow')}</p>
-              <h2 style={{ fontWeight: 800, fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
-                {t('home.whyOpus.title')}
-              </h2>
-              <p className="mt-3" style={{ color: 'var(--color-text-muted)', fontSize: '0.925rem', lineHeight: 1.7 }}>
-                {t('home.whyOpus.desc')}
-              </p>
-            </div>
-            <div className="col-md-7">
-              <Box style={{ height: 280 }} />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FEATURE SECTION ── */}
-      <section className="section-gap">
-        <div className="container">
-          <div className="row g-5 align-items-center">
-            <div className="col-md-7">
-              <Box style={{ height: 280 }} />
-            </div>
-            <div className="col-md-5">
-              <p className="label-tag mb-2">{t('home.section.eyebrow')}</p>
-              <h2 style={{ fontWeight: 800, fontSize: 'clamp(1.4rem, 2.5vw, 1.9rem)', letterSpacing: '-0.02em' }}>
-                {t('home.section.title')}
-              </h2>
-              <p className="mt-3" style={{ color: 'var(--color-text-muted)', fontSize: '0.925rem', lineHeight: 1.7 }}>
-                {t('home.section.desc')}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FEATURES GRID ── */}
-      <section className="section-gap" style={{ background: 'var(--color-surface)' }}>
-        <div className="container">
-          <div className="row g-4">
-            <div className="col-md-5">
-              <Box style={{ height: '100%', minHeight: 320 }} />
-            </div>
-            <div className="col-md-7 d-flex flex-column gap-3">
-              <Box style={{ height: 96 }} />
-              <Box style={{ height: 96 }} />
-              <Box style={{ height: 96 }} />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── TEMPLATE SHOWCASE ── */}
-      <section className="section-gap">
-        <div className="container">
-          <div className="row g-4">
-            {[1, 2, 3].map(i => (
-              <div key={i} className="col-md-4">
-                <Box style={{ height: 380 }} />
+        <section className="lp-wrap lp-bento">
+          <h2>{t('landing.benefits.title')}</h2>
+          <p className="lp-bsub">{t('landing.benefits.subtitle')}</p>
+          <div className="lp-pk">
+            {cards.map((c, k) => (
+              <div className="lp-pc" key={c.kicker}>
+                <span className="lp-ic">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">{ICONS[k]}</svg>
+                </span>
+                <span className="k">{c.kicker}</span>
+                <h3>{c.title}</h3>
+                <p>{c.desc}</p>
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── SUPPORT / FAQ ── */}
-      <section className="section-gap" style={{ background: 'var(--color-surface)' }}>
-        <div className="container">
-          <div className="row g-5 align-items-start">
-            <div className="col-md-5">
-              <p className="label-tag mb-2">{t('home.support.eyebrow')}</p>
-              <h2 style={{ fontWeight: 800, fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', letterSpacing: '-0.03em', lineHeight: 1.15 }}>
-                {t('home.support.title')}
-              </h2>
-              <p className="mt-3" style={{ color: 'var(--color-text-muted)', fontSize: '0.925rem', lineHeight: 1.7 }}>
-                {t('home.support.desc')}
-              </p>
-            </div>
-
-            <div className="col-md-7">
-              <div className="p-4" style={{ background: 'var(--color-surface-2)', borderRadius: 16 }}>
-                <p className="label-tag mb-3" style={{ fontWeight: 600, color: 'var(--color-text)' }}>
-                  {t('home.support.faqTitle')}
-                </p>
-                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '1.5rem' }}>
-                  {t('home.support.faqBody')}
-                </p>
-
-                <div className="d-flex flex-column gap-2">
-                  {['home.support.faq2', 'home.support.faq3', 'home.support.faq4'].map((key, i) => (
-                    <FaqItem key={i} question={t(key)} />
-                  ))}
-                </div>
+        <section className="lp-wrap lp-proof">
+          <h2>{t('landing.proof.title')}</h2>
+          <div className="lp-q3">
+            {quotes.map(q => (
+              <div className="lp-q" key={q.who}>
+                <p>{q.quote}</p>
+                <span>{q.who}</span>
               </div>
-            </div>
+            ))}
           </div>
-        </div>
-      </section>
-    </>
+        </section>
+
+        <section className="lp-wrap lp-faq" id="faq">
+          <div>
+            <h2>{t('landing.faq.title')}</h2>
+            <p className="l">{t('landing.faq.subtitle')}</p>
+            <Link to="/contact" className="lp-btn o">{t('landing.faq.contact')}</Link>
+          </div>
+          <div>
+            {faq.map(f => (
+              <details key={f.q}><summary>{f.q}</summary><p>{f.a}</p></details>
+            ))}
+          </div>
+        </section>
+
+        <section className="lp-wrap">
+          <div className="lp-fin">
+            <h2>{t('landing.final.title')} <em>{t('landing.final.titleEm')}</em></h2>
+            <button className="lp-btn" onClick={start}>{t('landing.final.cta')}</button>
+          </div>
+        </section>
+      </main>
+
+      <footer className="lp-wrap lp-ft">
+        <Logo height={22} className="lp-logo" />
+        <span>{t('landing.footer.rights')}</span>
+        <span>
+          <Link to="/contact">{t('landing.footer.contact')}</Link>
+          <Link to="/terms">{t('landing.footer.terms')}</Link>
+          <Link to="/privacy">{t('landing.footer.privacy')}</Link>
+        </span>
+      </footer>
+    </div>
   )
 }

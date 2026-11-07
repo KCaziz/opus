@@ -3,15 +3,20 @@
 
 /* ── Design tokens ── */
 :root {
-  --color-bg:         #f4f4f2;
-  --color-surface:    #e8e8e5;
-  --color-surface-2:  #dcdcda;
-  --color-border:     #d0d0cd;
-  --color-text:       #1a1a18;
-  --color-text-muted: #7a7a76;
-  --color-accent:     #1a1a18;
+  /* Marque OPUS : corail = accent fonctionnel (CTA), jamais une surface */
+  --color-bg:         #FBFAF8;
+  --color-surface:    #F0EEEA;
+  --color-surface-2:  #E6E2DC;
+  --color-border:     #DDD6D0;
+  --color-text:       #110303;
+  --color-text-muted: #5a4d4d;
+  --color-accent:     #110303;
+  --color-coral:      #DF5D5D;
+  --color-coral-deep: #A63F3F;
   --radius-card:      16px;
-  --font-sans:        'Inter', system-ui, sans-serif;
+  --font-sans:        'Figtree', system-ui, sans-serif;
+  --font-serif:       'STIX Two Text', Georgia, serif;
+  --font-mono:        'Chivo Mono', ui-monospace, monospace;
 }
 
 * {
@@ -20,12 +25,14 @@
   box-sizing: border-box;
 }
 
+html { font-size: 18px; }
+
 body {
   font-family: var(--font-sans);
   background-color: var(--color-bg);
   color: var(--color-text);
   -webkit-font-smoothing: antialiased;
-  font-size: 15px;
+  font-size: 17px;
 }
 
 /* ── Typography helpers ── */
@@ -58,7 +65,7 @@ body {
 
 /* ── Buttons ── */
 .btn-dark-opus {
-  background-color: var(--color-text);
+  background-color: var(--color-coral);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -197,7 +204,7 @@ body {
 
 /* Step nav buttons (add/save in editor steps) */
 .btn-step-primary {
-  background-color: var(--color-text);
+  background-color: var(--color-coral);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -258,8 +265,10 @@ body {
 
 /* ── Navbar ── */
 .navbar-opus {
-  background-color: var(--color-bg);
-  border-bottom: 1px solid var(--color-border);
+  background-color: #fff;
+  border-bottom: 1px solid rgba(17,3,3,.16);
+  box-shadow: 0 4px 16px rgba(17,3,3,.06);
+  position: sticky; top: 0; z-index: 30;
 }
 .navbar-brand-opus {
   font-size: 1.1rem;

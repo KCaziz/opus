@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { ChevronLeft, Check } from 'lucide-react'
+import { ChevronLeft, Check, Download } from 'lucide-react'
+import Logo from '../Logo'
 import { useCVState } from '../../store/CVContext'
 import { TEMPLATES } from '../../data/templates'
 import { calculateProgress } from '../../utils/progressCalc'
@@ -9,7 +10,7 @@ import { buildCVData } from '../../utils/buildCVData'
 import TemplatePreview from '../TemplatePreview'
 
 const STEPS = [
-  'personalInfo', 'summary', 'experience', 'education', 'skills', 'finalize',
+  'personalInfo', 'summary', 'experience', 'education', 'skills', 'template', 'finalize',
 ]
 
 export default function WizardLayout({ currentStep, onStepChange, children }) {
@@ -17,6 +18,9 @@ export default function WizardLayout({ currentStep, onStepChange, children }) {
   const cvState     = useCVState()
   const tpl         = TEMPLATES.find(t => t.id === cvState.templateId)
   const { global: globalPct } = calculateProgress(cvState)
+  const lastStep = STEPS.length - 1
+  // Navigation libre entre toutes les sections, seulement une fois le téléchargement atteint
+  const unlocked = (cvState.maxStep || 0) >= lastStep
 
   const previewData = useMemo(() => ({
     firstName: cvState.personalInfo.firstName,
@@ -26,20 +30,24 @@ export default function WizardLayout({ currentStep, onStepChange, children }) {
   }), [cvState, i18n.language])
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--color-bg)' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--color-surface)' }}>
 
       {/* ── Top bar ── */}
       <div style={{
         backgroundColor: '#fff',
-        borderBottom: '1px solid var(--color-border)',
-        padding: '10px 0',
+        borderBottom: '2px solid rgba(17,3,3,.14)',
+        boxShadow: '0 8px 24px rgba(17,3,3,.10)',
+        padding: '12px 0',
         position: 'sticky', top: 0, zIndex: 20,
       }}>
         <div className="container d-flex align-items-center gap-3">
+          <Link to="/" aria-label="OPUS" style={{ display: 'flex' }}>
+            <Logo height={20} style={{ color: 'var(--color-coral)' }} />
+          </Link>
 
           {/* Back button — real button appearance */}
           <Link
-            to="/builder"
+            to="/"
             className="btn-editor-back"
           >
             <ChevronLeft size={15} style={{ flexShrink: 0 }} />
@@ -65,8 +73,14 @@ export default function WizardLayout({ currentStep, onStepChange, children }) {
           )}
 
           {/* Progress pill — right side */}
-          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 14 }}>
             <ProgressPill pct={globalPct} label={t('editor.progressLabel')} />
+            {unlocked && currentStep !== lastStep && (
+              <button onClick={() => onStepChange(lastStep)} className="btn-dark-opus"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: 6, borderRadius: 999, fontSize: '0.82rem' }}>
+                <Download size={14} />{t('editor.backToDownload')}
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -78,6 +92,7 @@ export default function WizardLayout({ currentStep, onStepChange, children }) {
         <div className="editor-form-col" style={{
           flex: '0 0 48%', overflowY: 'auto',
           padding: '32px 0',
+          backgroundColor: 'var(--color-bg)',
           borderRight: '1px solid var(--color-border)',
         }}>
           <div style={{ maxWidth: 520, margin: '0 auto', padding: '0 28px' }}>
@@ -92,7 +107,8 @@ export default function WizardLayout({ currentStep, onStepChange, children }) {
                   total={STEPS.length}
                   isActive={idx === currentStep}
                   isDone={idx < currentStep}
-                  onClick={() => idx < currentStep && onStepChange(idx)}
+                  clickable={idx !== currentStep && (unlocked || idx < currentStep)}
+                  onClick={() => idx !== currentStep && (unlocked || idx < currentStep) && onStepChange(idx)}
                 />
               ))}
             </div>
@@ -136,13 +152,13 @@ export default function WizardLayout({ currentStep, onStepChange, children }) {
   )
 }
 
-function StepPill({ index, label, total, isActive, isDone, onClick }) {
+function StepPill({ index, label, total, isActive, isDone, clickable, onClick }) {
   return (
     <div
       onClick={onClick}
       style={{
         flex: 1, textAlign: 'center', position: 'relative',
-        cursor: isDone ? 'pointer' : 'default',
+        cursor: clickable ? 'pointer' : 'default',
         paddingBottom: 10,
       }}
     >
@@ -150,9 +166,9 @@ function StepPill({ index, label, total, isActive, isDone, onClick }) {
         width: 26, height: 26, borderRadius: '50%', margin: '0 auto 6px',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         fontSize: '0.72rem', fontWeight: 700, transition: 'all 0.2s',
-        backgroundColor: isActive ? 'var(--color-text)' : isDone ? 'var(--color-text)' : 'var(--color-surface)',
-        color: isActive || isDone ? '#fff' : 'var(--color-text-muted)',
-        border: isActive ? '2px solid var(--color-text)' : isDone ? 'none' : '1.5px solid var(--color-border)',
+        backgroundColor: isActive ? 'var(--color-coral)' : isDone ? 'var(--color-text)' : 'var(--color-surface)',
+        color: isActive || isDone ? '#fff' : clickable ? 'var(--color-text)' : 'var(--color-text-muted)',
+        border: isActive ? '2px solid var(--color-coral)' : isDone ? 'none' : clickable ? '1.5px solid var(--color-text)' : '1.5px solid var(--color-border)',
       }}>
         {isDone ? <Check size={12} /> : index + 1}
       </div>
@@ -178,7 +194,7 @@ function StepPill({ index, label, total, isActive, isDone, onClick }) {
 }
 
 function ProgressPill({ pct, label }) {
-  const color = pct < 40 ? '#f59e0b' : pct < 70 ? '#3b82f6' : '#059669'
+  const color = 'var(--color-coral)'
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
       <div style={{

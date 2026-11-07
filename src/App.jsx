@@ -28,7 +28,8 @@ export default function App() {
 
   return (
     <Routes>
-      {/* ── Full-page editor (no Navbar/Footer) ── */}
+      {/* ── Pages plein écran (chrome propre, sans Navbar/Footer) ── */}
+      <Route path="/"       element={<Home />}   />
       <Route path="/editor" element={<Editor />} />
 
       {/* ── Standard layout ── */}
@@ -37,7 +38,6 @@ export default function App() {
           <Navbar />
           <main style={{ flex: 1 }}>
             <Routes>
-              <Route path="/"                    element={<Home />}       />
               <Route path="/about"               element={<About />}      />
               <Route path="/builder"             element={<Builder />}    />
               <Route path="/onboarding/:templateId" element={<Onboarding />} />

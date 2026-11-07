@@ -24,7 +24,8 @@ i18n
       escapeValue: false,
     },
     detection: {
-      order: ['localStorage', 'navigator', 'htmlTag'],
+      // Français d'abord : l'arabe et l'anglais arrivent dans une phase ultérieure
+      order: ['localStorage'],
       caches: ['localStorage'],
       lookupLocalStorage: 'opus_lang',
     },

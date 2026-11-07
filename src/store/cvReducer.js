@@ -25,10 +25,14 @@ export const ACTIONS = {
   RESET:                'RESET',
 }
 
+// Modèle par défaut : l'utilisateur commence sans choisir, le modèle se choisit à la fin
+export const DEFAULT_TEMPLATE_ID = 'ats-standard'
+
 export const initialState = {
-  templateId:   null,
+  templateId:   DEFAULT_TEMPLATE_ID,
   accentColor:  null,
   currentStep:  0,
+  maxStep:      0,
   personalInfo: {
     firstName: '',
     lastName:  '',
@@ -64,7 +68,12 @@ export function cvReducer(state, action) {
       return { ...state, accentColor: action.payload }
 
     case ACTIONS.SET_STEP:
-      return { ...state, currentStep: action.payload }
+      return {
+        ...state,
+        currentStep: action.payload,
+        // étape la plus avancée atteinte : débloque la navigation libre une fois au téléchargement
+        maxStep: Math.max(state.maxStep || 0, action.payload),
+      }
 
     case ACTIONS.UPDATE_PERSONAL_INFO:
       return {

@@ -1,23 +1,24 @@
 import { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Download, Loader2, CheckCircle } from 'lucide-react'
-import { useCVState, useCVDispatch } from '../../../store/CVContext'
-import { ACTIONS } from '../../../store/cvReducer'
-import { ACCENT_COLORS, TEMPLATES } from '../../../data/templates'
+import { Download, Loader2, CheckCircle, ArrowRight } from 'lucide-react'
+import { getCVAdvice } from '../../../utils/cvAdvice'
+import { useCVState } from '../../../store/CVContext'
+import { TEMPLATES } from '../../../data/templates'
 import { calculateProgress, SECTIONS } from '../../../utils/progressCalc'
 import { buildCVData } from '../../../utils/buildCVData'
 import { StepHeader, StepNav } from './StepCoordonnees'
 
-export default function StepFinaliser({ onBack }) {
+const STEP_KEYS = ['personalInfo', 'summary', 'experience', 'education', 'skills', 'template']
+
+export default function StepFinaliser({ onBack, onGoTo }) {
   const { t, i18n } = useTranslation()
   const state        = useCVState()
-  const dispatch     = useCVDispatch()
   const pdfRef       = useRef(null)
   const [generating, setGenerating] = useState(false)
 
   const { global, sections } = calculateProgress(state)
   const tpl      = TEMPLATES.find(tp => tp.id === state.templateId)
-  const tips     = ['tip1', 'tip2', 'tip3', 'tip4']
+  const advice   = getCVAdvice(state)
   const pdfData  = buildCVData(state, i18n.language)
   const CVTpl    = tpl?.component
   const firstName = state.personalInfo.firstName || 'CV'
@@ -80,29 +81,6 @@ export default function StepFinaliser({ onBack }) {
         </div>
       </div>
 
-      {/* Color picker */}
-      <div style={{ marginTop: 24, marginBottom: 20 }}>
-        <div style={{ fontSize: '0.85rem', fontWeight: 600, marginBottom: 4 }}>{t('editor.finalize.colorTitle')}</div>
-        <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: 10 }}>{t('editor.finalize.colorHint')}</p>
-        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-          {ACCENT_COLORS.map(c => (
-            <button
-              key={c.id}
-              onClick={() => dispatch({ type: ACTIONS.SET_ACCENT_COLOR, payload: c.hex })}
-              title={t(c.labelKey)}
-              style={{
-                width: 32, height: 32, borderRadius: '50%', border: 'none',
-                backgroundColor: c.hex, cursor: 'pointer',
-                outline: state.accentColor === c.hex ? `3px solid ${c.hex}` : '3px solid transparent',
-                outlineOffset: 3,
-                transform: state.accentColor === c.hex ? 'scale(1.2)' : 'scale(1)',
-                transition: 'transform 0.15s',
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
       {/* PDF Download */}
       <div style={pdfSection}>
         <div style={{ flex: 1 }}>
@@ -124,15 +102,27 @@ export default function StepFinaliser({ onBack }) {
         </button>
       </div>
 
-      {/* Tips */}
-      <div style={{ marginTop: 20 }}>
-        <div style={{ fontSize: '0.85rem', fontWeight: 600, marginBottom: 10 }}>{t('editor.finalize.tips')}</div>
-        {tips.map(k => (
-          <div key={k} style={{ display: 'flex', gap: 10, marginBottom: 8, fontSize: '0.82rem', color: 'var(--color-text-muted)', alignItems: 'flex-start' }}>
-            <CheckCircle size={14} style={{ color: '#059669', flexShrink: 0, marginTop: 1 }} />
-            {t(`editor.finalize.${k}`)}
+      {/* Comment améliorer ce CV : conseils précis, chacun avec un lien vers la bonne section */}
+      <div style={{ marginTop: 24 }}>
+        <div style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: 4 }}>{t('editor.advice.title')}</div>
+        <p style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', marginBottom: 12 }}>
+          {advice.length ? t('editor.advice.subtitle', { count: advice.length }) : t('editor.advice.done')}
+        </p>
+        {advice.map((a, i) => (
+          <div key={i} style={adviceRow}>
+            <span style={adviceTag}>{t(`editor.steps.${STEP_KEYS[a.step]}`)}</span>
+            <span style={{ flex: 1, fontSize: '0.84rem', lineHeight: 1.45 }}>{t(`editor.advice.items.${a.key}`, a.params)}</span>
+            <button onClick={() => onGoTo?.(a.step)} style={adviceBtn}>
+              {t('editor.advice.fix')} <ArrowRight size={13} />
+            </button>
           </div>
         ))}
+        {advice.length === 0 && (
+          <div style={{ ...adviceRow, color: 'var(--color-text-muted)' }}>
+            <CheckCircle size={16} style={{ color: 'var(--color-coral)' }} />
+            <span style={{ fontSize: '0.84rem' }}>{t('editor.advice.allGood')}</span>
+          </div>
+        )}
       </div>
 
       <StepNav onBack={onBack} onNext={() => {}} canContinue={false} t={t} isLast />
@@ -157,10 +147,8 @@ export default function StepFinaliser({ onBack }) {
   )
 }
 
-function completionColor(pct) {
-  if (pct < 40) return '#f59e0b'
-  if (pct < 70) return '#3b82f6'
-  return '#059669'
+function completionColor() {
+  return 'var(--color-coral)'
 }
 
 const completionBar = {
@@ -181,7 +169,22 @@ const pdfSection = {
 }
 const dlBtn = {
   padding: '8px 20px', border: 'none', borderRadius: 8,
-  backgroundColor: 'var(--color-text)', color: '#fff',
+  backgroundColor: 'var(--color-coral)', color: '#fff',
   fontSize: '0.82rem', fontWeight: 600, fontFamily: 'inherit',
   display: 'flex', alignItems: 'center', transition: 'opacity 0.15s',
+}
+
+const adviceRow = {
+  display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px', marginBottom: 8,
+  background: '#fff', border: '1px solid var(--color-border)', borderRadius: 10,
+}
+const adviceTag = {
+  fontFamily: 'var(--font-mono)', fontSize: '0.66rem', textTransform: 'uppercase', letterSpacing: '0.05em',
+  color: 'var(--color-coral-deep)', background: '#fbeaea', padding: '3px 8px', borderRadius: 99, flexShrink: 0,
+}
+const adviceBtn = {
+  display: 'inline-flex', alignItems: 'center', gap: 4, flexShrink: 0,
+  background: 'none', border: '1.5px solid var(--color-border)', borderRadius: 99,
+  padding: '5px 12px', fontSize: '0.78rem', fontWeight: 600, fontFamily: 'inherit',
+  color: 'var(--color-text)', cursor: 'pointer',
 }
